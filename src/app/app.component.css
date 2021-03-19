@@ -1,0 +1,34 @@
+.container {
+  max-width: 720px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+table {
+  margin: 2rem auto;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.div-form {
+  margin: 2rem auto;
+  width: 50%;
+}
+
+.btn-action {
+  display: flex;
+}
+
+.mat-toolbar-single-row {
+  justify-content: center;
+}
+
+.alert-danger {
+  color: red;
+  font-weight: bold;
+}

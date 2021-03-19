@@ -1,0 +1,75 @@
+<mat-toolbar color="primary">
+  <h1 class="text-center">Accounts for Client {{clientId}}</h1>
+</mat-toolbar>
+<div class="container">
+
+  <h3 class="text-center" *ngIf="loading">Loading...</h3>
+
+  <table mat-table *ngIf="!loading" class="mat-elevation-z8" [dataSource]="accounts">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let account"> {{account.id}} </td>
+    </ng-container>
+
+    <!-- Account # Column -->
+    <ng-container matColumnDef="accountNumber">
+      <th mat-header-cell *matHeaderCellDef> Account # </th>
+      <td mat-cell *matCellDef="let account"> {{account.accountNumber}} </td>
+    </ng-container>
+
+    <!-- Balance Column -->
+    <ng-container matColumnDef="balanceInCents">
+      <th mat-header-cell *matHeaderCellDef> Balance </th>
+      <td mat-cell *matCellDef="let account"> {{account.balanceInCents | cents2dollars | currency: 'USD'}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let account">
+        <div class="btn-action">
+          <button mat-raised-button color="primary"
+            [routerLink]="['/clients', account.clientId, 'accounts', account.id, 'update']">Update</button>
+          <button mat-raised-button color="warn" (click)="delete(account.id)">Delete</button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- <thead>
+      <th>ID</th>
+      <th>Account #</th>
+      <th>Balance</th>
+      <th>Actions</th>
+    </thead> -->
+    <!-- <tbody>
+      <tr *ngFor="let account of accounts">
+        <td>{{account.id}}</td>
+        <td>{{account.accountNumber}}</td>
+        <td>{{account.balanceInCents}}</td>
+        <td>
+          <button mat-raised-button color="primary"
+            [routerLink]="['/clients', account.clientId, 'accounts', account.id, 'update']">Update</button>
+          <button mat-raised-button color="warn" (click)="delete(account.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody> -->
+  </table>
+
+  <div class="text-center" *ngIf="!loading">
+    <h3>{{status}}</h3>
+    <button mat-raised-button color="accent" [routerLink]="['/clients', clientId, 'accounts', 'create']">Create
+      Account</button>
+  </div>
+
+  <br /><br />
+  <div class="text-center">
+    <button mat-fab color="warn" routerLink="/">
+      <mat-icon>home</mat-icon>
+    </button>
+  </div>
+</div>
